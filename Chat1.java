@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
-public class Chat extends HttpServlet {
+public class Chat1 extends HttpServlet {
     private ArrayList<String> messlist = new ArrayList<String>();
 
 
