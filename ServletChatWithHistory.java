@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class Chat extends HttpServlet {
+public class ServletChatWithHistory extends HttpServlet {
     //private ArrayList<String> messlist = new ArrayList<String>();
 
 
