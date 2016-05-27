@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <script language="JavaScript">
+            function lookThroughXML(xml) {
+                var messages = xml.firstChild.childNodes;
+                $("#messList").empty();
+                for (var i = 0; i < messages.length; i++) {
+                    var number = messages[i].getAttribute("id");
+                    $("#messList").append(number + " ");
+                    var sender = messages[i].firstChild;
+                    $("#messList").append(sender.textContent + "<br>");
+                    var text = messages[i].childNodes[1];
+                    $("#messList").append(text.textContent + "<br><br>");
+
+                }
+            }
+            function doPost() {
+                var msg = $("#chatMessage").val();
+                jQuery.post({
+                                url: "/Chat/message",
+                                data: msg,
+                                success: lookThroughXML,
+                                dataType: "xml"
+                });
+                $("#chatMessage").val('');
+            }
+        function init() {
+            jQuery.get({url: "/Chat/message", success: lookThroughXML});
+            $("#sender").click(doPost);
+        }
+
+        </script>
+</head>
+<body onload="init()">
+
+<form id="form" action="/Chat/message" method="post">
+    <input type="text" id="chatMessage" name="message" size=40>
+    <input type="button" id="sender" value="Send" >
+</form>
+
+<div id="messList"></div>
+
+</body>
+</html>
